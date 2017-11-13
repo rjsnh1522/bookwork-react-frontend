@@ -12,7 +12,7 @@ import {loginAction} from '../../actions/auth';
 
 class LoginPage extends Component {
 
-  submitLoginForm = (data) =>  this.props.loginAction(data).then(()=> this.props.history.push('/'));
+  submitLoginForm = (data) =>  this.props.loginAction(data).then(()=> this.props.history.push('/dashboard'));
 
 
 

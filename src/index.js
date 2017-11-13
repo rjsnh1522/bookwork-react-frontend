@@ -6,7 +6,7 @@ import 'semantic-ui-css/semantic.min.css';
 
 import {createStore, applyMiddleware} from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter,Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import registerServiceWorker from './registerServiceWorker';
@@ -35,7 +35,7 @@ if(localStorage.bookworkJWT){
 ReactDOM.render(
 <BrowserRouter>
   <Provider store={store}>
-    <App />
+    <Route component={App} />
   </Provider>
 </BrowserRouter>, document.getElementById('root'));
 registerServiceWorker();

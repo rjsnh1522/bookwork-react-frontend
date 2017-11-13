@@ -31,8 +31,6 @@ HomePage.PropTypes ={
 
 function mapStateToProps(state){
   //this return the props which will available to this component
-
-  console.log("home",state.userReducer)
   return {
     isAuthenticated: !!state.userReducer.token,
     logoutAction:PropTypes.func.isRequired
