@@ -3,16 +3,20 @@ import React,{Component} from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Button } from 'semantic-ui-react'
+import {logoutAction} from '../../actions/auth';
+
 
 
 class HomePage extends Component {
 
   render(){
-    const {isAuthenticated} = this.props;
+    const {isAuthenticated,logoutAction} = this.props;
+    console.log(this.props);
     return (
       <div>
               <h1>  HomePage   </h1>
-              {isAuthenticated ? <Link to="/logout">Logout </Link> : <Link to="/login">Login </Link>}
+              {isAuthenticated ? <Button onClick={()=>logoutAction()}>Logout </Button> : <Link to="/login">Login </Link>}
 
       </div>
 
@@ -28,11 +32,12 @@ HomePage.PropTypes ={
 function mapStateToProps(state){
   //this return the props which will available to this component
 
-  console.log(state)
+  console.log("home",state.userReducer)
   return {
-    // isAuthenticated: !!state.user.token
+    isAuthenticated: !!state.userReducer.token,
+    logoutAction:PropTypes.func.isRequired
   }
 
 }
 
-export default connect(mapStateToProps,null)(HomePage);
+export default connect(mapStateToProps,{logoutAction})(HomePage);

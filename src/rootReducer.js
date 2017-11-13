@@ -9,6 +9,6 @@ import userReducer from "./reducers/userReducer";
 
 export default combineReducers({
 
-  userReducer: () =>({})
+  userReducer
 
 });

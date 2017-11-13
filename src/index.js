@@ -10,12 +10,24 @@ import {BrowserRouter} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import registerServiceWorker from './registerServiceWorker';
-import rootReducer from './rootReducer'
+import rootReducer from './rootReducer';
+import {userLoggedIn} from './actions/auth';
 
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
+
+
+// if user token is present than dispath user logged in action
+
+if(localStorage.bookworkJWT){
+  const user = {
+    token:localStorage.bookworkJWT
+  };
+  store.dispatch(userLoggedIn(user));
+}
+
 
 // createStore takes two args 1st is rootReducer its whole state object
 // 2. Provider is high order Component from react redux in which we wrap or application and it takes store as props

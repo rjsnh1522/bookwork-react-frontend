@@ -1,4 +1,4 @@
-import {USER_LOGGED_IN} from '../types';
+import {USER_LOGGED_IN,USER_LOGGED_OUT} from '../types';
 import api from '../api'
 
 
@@ -10,10 +10,19 @@ import api from '../api'
 
 
 export function userLoggedIn(user){
-  console.log(user)
   const action={
       type:USER_LOGGED_IN,
       user
+    }
+
+    return action
+
+}
+
+
+export function userLoggedOut(){
+  const action={
+      type:USER_LOGGED_OUT,
     }
 
     return action
@@ -30,8 +39,14 @@ export function userLoggedIn(user){
 export const loginAction = (credentials) => dispatch  =>
 
   api.user.login(credentials).then(user => {
-                                dispatch(userLoggedIn(user))
-                              }
-
+    localStorage.bookworkJWT = user.token;
+                dispatch(userLoggedIn(user))
+                }
 
 );
+
+
+export const logoutAction = () => dispatch  => {
+  localStorage.removeItem('bookworkJWT');
+          dispatch(userLoggedOut())
+};
