@@ -17,7 +17,6 @@ class SignupPage extends Component {
       <div>
         <Link to="/">Home </Link>
         <SignupForm submit={this.submitSignUpForm}/>
-
       </div>
 
     )
@@ -33,4 +32,4 @@ SignupPage.PropTypes = {
 
 
 
-export default connect(null,{signUpAction})(SignupPage);
+export default connect(null, {signUpAction})(SignupPage);

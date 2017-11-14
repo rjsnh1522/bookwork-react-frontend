@@ -40,7 +40,7 @@ class LoginForm extends Component {
         // this submit method is inside LoginPage.js its a prop this submit method invokes submitLoginForm function of LoginPage.js
 
         this.props.submit(this.state.data)
-        .catch(err => this.setState({errors: err.response.data.errors,loading:false})
+        .catch(err => { this.setState({errors: err.response.data.errors,loading:false})}
       );
 
       }

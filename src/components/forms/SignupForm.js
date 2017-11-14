@@ -40,7 +40,7 @@ class SignupForm extends Component {
         // submitSignupForm function of signupPage.js
 
       this.props.submit(this.state.data)
-        .catch(err => this.setState({errors: err.response.data.errors,loading:false})
+        .catch(err => {console.log(err.response);this.setState({errors: err.response.data.errors,loading:false})}
       );
     }
   }

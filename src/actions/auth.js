@@ -43,12 +43,11 @@ export function userSignUp(user){
 // // which will be used by user_reducer to update the state throughout the project
 
 export const loginAction = (credentials) => dispatch  =>
-
   api.user.login(credentials).then(user => {
           console.log(user);
     localStorage.bookworkJWT = user.token;
                 dispatch(userLoggedIn(user))
-                });
+  });
 
 
 export const logoutAction = () => dispatch  => {
@@ -57,15 +56,14 @@ export const logoutAction = () => dispatch  => {
 };
 
 
-export const signUpAction =(formData) =>dispatch => {
-  api.user.signupApi(formData).then(function(user){
-    console.log(user);
+export const signUpAction = (formData) => dispatch =>
+  api.user.signupApi(formData).then(user => {
+      console.log(user);
+      localStorage.bookworkJWT = user.token;
     dispatch(userSignUp(user))
-  }).catch(function(error){
-    console.log(error);
   });
 
-}
+
 
 
 
