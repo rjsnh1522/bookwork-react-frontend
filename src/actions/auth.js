@@ -44,7 +44,6 @@ export function userSignUp(user){
 
 export const loginAction = (credentials) => dispatch  =>
   api.user.login(credentials).then(user => {
-          console.log(user);
     localStorage.bookworkJWT = user.token;
                 dispatch(userLoggedIn(user))
   });
@@ -58,7 +57,6 @@ export const logoutAction = () => dispatch  => {
 
 export const signUpAction = (formData) => dispatch =>
   api.user.signupApi(formData).then(user => {
-      console.log(user);
       localStorage.bookworkJWT = user.token;
     dispatch(userSignUp(user))
   });

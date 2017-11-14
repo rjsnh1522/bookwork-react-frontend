@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 
 import {Form , Button,Message,Grid } from 'semantic-ui-react'
-import { Link } from 'react-router-dom';
 import Validator from 'validator';
 import InLineError from '../messages/InLineError'
 import PropTypes from 'prop-types';
@@ -50,7 +49,7 @@ class SignupForm extends Component {
 
     if(data.username.length < 6) errors.username = "Username should be greater than 6";
     if(!data.confirm_password) errors.confirm_password ="Confirm password can't be blank";
-    if(data.password != data.confirm_password) errors.confirm_password = "password confirmation must be same as password";
+    if(data.password !== data.confirm_password) errors.confirm_password = "password confirmation must be same as password";
     if(!Validator.isEmail(data.email)) errors.email = "Invalid Email";
     if(data.password.length < 6) errors.password = "Must be 6 or greater";
     if(!data.password) errors.password = "Can't Be blank";
