@@ -22,8 +22,6 @@ GuestRoute.PropTypes = {
 
 
 function mapStateToProps(state){
-
-  console.log(state.user)
   return {
     isAuthenticated: !!state.userReducer.token
   }

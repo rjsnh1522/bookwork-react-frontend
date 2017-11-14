@@ -1,4 +1,4 @@
-import {USER_LOGGED_IN,USER_LOGGED_OUT} from '../types';
+import {USER_LOGGED_IN,USER_LOGGED_OUT,USER_SIGNED_UP} from '../types';
 import api from '../api'
 
 
@@ -29,7 +29,13 @@ export function userLoggedOut(){
 
 }
 
-
+export function userSignUp(user){
+  const action ={
+    type:USER_SIGNED_UP,
+    user
+  }
+  return action
+}
 
 // the data passed from LoginPage component inside loginAction function came here then we
 // pass this data to api.js to user login object their ajax request is performed and
@@ -39,14 +45,39 @@ export function userLoggedOut(){
 export const loginAction = (credentials) => dispatch  =>
 
   api.user.login(credentials).then(user => {
+          console.log(user);
     localStorage.bookworkJWT = user.token;
                 dispatch(userLoggedIn(user))
-                }
-
-);
+                });
 
 
 export const logoutAction = () => dispatch  => {
   localStorage.removeItem('bookworkJWT');
           dispatch(userLoggedOut())
 };
+
+
+export const signUpAction =(formData) =>dispatch => {
+  api.user.signupApi(formData).then(function(user){
+    console.log(user);
+    dispatch(userSignUp(user))
+  }).catch(function(error){
+    console.log(error);
+  });
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//

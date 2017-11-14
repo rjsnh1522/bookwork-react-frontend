@@ -5,9 +5,17 @@ export default {
   user: {
     login: credentials =>
       axios.post(url+"/sessions",{credentials}).then(res => {
+          console.log(res)
 
               return (res.data.user)
-              // console.log(res)
-      })
+      }),
+    signupApi: formData =>{
+      axios.post(url+"/registrations",{formData}).then(function(res){
+            console.log("then",res)
+              return (res.data.user)
+      }).catch(function(error){
+        console.log(error);
+      });
+    }
   }
 };
