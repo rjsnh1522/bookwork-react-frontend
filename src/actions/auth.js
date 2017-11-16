@@ -37,6 +37,9 @@ export function userSignUp(user){
   return action
 }
 
+
+
+
 // the data passed from LoginPage component inside loginAction function came here then we
 // pass this data to api.js to user login object their ajax request is performed and
 // and after getting the data userLoggedIn function is called which returns the type and user
@@ -63,6 +66,10 @@ export const signUpAction = (formData) => dispatch =>
 
 
 
+export const confirmAction = (token) => dispatch =>
+  api.user.emailConfirmation(token).then(user => {
+    console.log(user);
+  });
 
 
 

@@ -7,5 +7,7 @@ export default {
       axios.post(url+"/sessions",{credentials}).then(res => {return (res.data.user)}),
     signupApi: formData =>
       axios.post(url+"/registrations",{formData}).then(res => {return (res.data.user)}),
+    emailConfirmation: token =>
+      axios.post(url+"/registrations/confirmation",{token}).then(res => { return (res.data.user) }),
   }
 };
