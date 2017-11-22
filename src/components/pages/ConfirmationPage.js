@@ -41,6 +41,14 @@ render(){
             <Message.Header>Thank you. you are verified</Message.Header>
             <Link to="/dashboard"> Go to your dashboard </Link>
           </Message>}
+
+          {!loading && !success && <Message negative icon>
+              <Icon name="warning sign"/>
+              <Message.Header>OOps Invalid token</Message.Header>
+            </Message>}
+
+
+
     </div>
   )
 }

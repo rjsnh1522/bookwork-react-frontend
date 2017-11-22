@@ -25,8 +25,6 @@ class LoginPage extends Component {
     return (
       <div>
         <Link to="/">Home </Link>
-
-            <h1>  LoginPage   </h1>
         <LoginForm submit={this.submitLoginForm}/>
       </div>
 

@@ -108,7 +108,7 @@ class SignupForm extends Component {
                   </Form.Field>
                     <Button primary> Sign Up </Button>
                 </Form>
-           </Grid.Column >
+           </Grid.Column>
         </Grid.Row>
       </Grid>
     )

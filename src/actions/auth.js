@@ -48,11 +48,13 @@ export function userSignUp(user){
 export const loginAction = (credentials) => dispatch  =>
   api.user.login(credentials).then(user => {
     localStorage.bookworkJWT = user.token;
-                dispatch(userLoggedIn(user))
+    localStorage.email =user.email
+    dispatch(userLoggedIn(user))
   });
 
 
 export const logoutAction = () => dispatch  => {
+  console.log('clicke')
   localStorage.removeItem('bookworkJWT');
           dispatch(userLoggedOut())
 };
@@ -68,16 +70,39 @@ export const signUpAction = (formData) => dispatch =>
 
 export const confirmAction = (token) => dispatch =>
   api.user.emailConfirmation(token).then(user => {
-    console.log(user);
+    localStorage.bookworkJWT = user.token;
+    dispatch(userLoggedIn(user));
   });
 
 
 
+// export const resetPasswordRequestAction(data)
+
+//below is the es 5 way of sending request and receiving data
+export const resetPasswordRequestAction = function
+  resetPasswordRequestAction(data){
+    return function(dispatch){
+      return api.user.passwordReset(data).then(function(user){
+          console.log(user);
+      })
+    }
+  }
+
+  // below code in es 6 way of above code
+  // export const resetPasswordRequestAction = (data) => dispatch =>
+  // api.user.passwordReset(data).then(function(user){
+  //     console.log(user);
+  // });
 
 
 
+export const validateTokenAction = (token) => () =>
 
+api.user.validateToken(token);
 
+export const passwordResetAction = (data) => (dispatch) =>
+  api.user.passwordResetFormData(data).then((user) => {
+  });
 
 
 
