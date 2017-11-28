@@ -9,6 +9,8 @@ import ConfirmationPage from './components/pages/ConfirmationPage'
 import ForgotPassword from './components/pages/ForgotPassword'
 import ResetPasswordPage from './components/pages/ResetPasswordPage'
 import NewBookPage from './components/pages/NewBookPage'
+import AllBooksPage from './components/pages/AllBooksPage'
+
 
 
 import TopNavigation from './components/navigation/TopNavigation'
@@ -34,6 +36,7 @@ class App extends Component {
         <GuestRoute location={location}  path='/forgot-password' exact component={ForgotPassword}/>
         <UserRoute location={location}  path='/dashboard' exact component={DashboardPage}/>
         <UserRoute location={location}  path='/books/new' exact component={NewBookPage}/>
+        <UserRoute location={location}  path='/books/all' exact component={AllBooksPage}/>
       </div>
 
     )

@@ -3,23 +3,15 @@ import {Form,Dropdown} from 'semantic-ui-react'
 import axios from 'axios';
 import {searchBookAction} from '../../actions/books'
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-
+const url = `http://localhost:4000`;
 class SearchBookForm  extends Component{
 
   state = {
     query: '',
     loading:false,
-    options:[{
-      key:1,
-      value:'1',
-      text:"asddsdd"
-    },
-    {
-      key:2,
-      value:'1',
-      text:"adfsafsfgfszgf"
-    }],
+    options:[ ],
     books:{}
   }
 
@@ -33,18 +25,42 @@ class SearchBookForm  extends Component{
 
   }
 
+  onChange = (e,data) =>{
+    this.setState({query:data.value});
+    this.props.onBookSelect(this.state.books[data.value]);
+  }
   fetchOptions = () =>{
     if(!this.state.query) return;
     this.setState({loading:true});
-    console.log(this.state.query)
     // this.props.searchBookAction(this.state.query)
     // this.props.searchBookAction
-    axios.get(`/api/books/search?q=${this.state.query}`)
-    .then(res => res.data.books)
+    const qr = this.state.query
+    axios.get(url+'/books/search',{params:{
+      qr:qr
+    }})
+    .then(res => res.data.all_books)
+    .then(books => {
+      const options = [];
+      const booksHash ={};
+      const len = Object.keys(books).length;
+
+      books.forEach(book => {
+        booksHash[book.book_id] = book;
+        options.push({
+          key: book.book_id,
+          value: book.book_id,
+          text: book.name
+        })
+      })
+      this.setState({loading:false,options,books:booksHash})
+
+    })
+
+
   }
 
     render(){
-      const {loading} = this.state;
+
       return(
       <Form>
         <Dropdown
@@ -54,7 +70,8 @@ class SearchBookForm  extends Component{
           value={this.state.query}
           onSearchChange={this.onSearchChange}
           options={this.state.options}
-          loading={loading}
+          loading={this.state.loading}
+          onChange={this.onChange}
         />
       </Form>
       )
@@ -62,7 +79,9 @@ class SearchBookForm  extends Component{
 
 }
 
-
+SearchBookForm.PropTypes = {
+  onBookSelect: PropTypes.func.isRequired
+}
 
 
 export default connect(null,{searchBookAction})(SearchBookForm);

@@ -20,5 +20,12 @@ export default {
     passwordResetFormData: data =>
       axios.post(url+"/registrations/password_reset_form",{data})
 
+  },
+  book:{
+    saveNewBook: data =>
+      axios.post(url+"/books/save_books",{data}).then(res => {return res.data.book;}),
+    fetchAll: () =>
+      axios.get(url+"/books").then(res => { return res.data.books })
+
   }
 };

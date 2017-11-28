@@ -1,6 +1,6 @@
 import {USER_LOGGED_IN,USER_LOGGED_OUT,USER_SIGNED_UP} from '../types';
 import api from '../api'
-
+import setAuthorizationHeader from '../utils/setAuthorizationHeader'
 
 
 // action is function which returns another function
@@ -49,6 +49,7 @@ export const loginAction = (credentials) => dispatch  =>
   api.user.login(credentials).then(user => {
     localStorage.bookworkJWT = user.token;
     localStorage.email =user.email
+    setAuthorizationHeader(user.token);
     dispatch(userLoggedIn(user))
   });
 
@@ -56,6 +57,7 @@ export const loginAction = (credentials) => dispatch  =>
 export const logoutAction = () => dispatch  => {
   console.log('clicke')
   localStorage.removeItem('bookworkJWT');
+          setAuthorizationHeader();
           dispatch(userLoggedOut())
 };
 
@@ -83,7 +85,7 @@ export const resetPasswordRequestAction = function
   resetPasswordRequestAction(data){
     return function(dispatch){
       return api.user.passwordReset(data).then(function(user){
-          console.log(user);
+
       })
     }
   }
@@ -97,7 +99,6 @@ export const resetPasswordRequestAction = function
 
 
 export const validateTokenAction = (token) => () =>
-
 api.user.validateToken(token);
 
 export const passwordResetAction = (data) => (dispatch) =>

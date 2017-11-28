@@ -12,7 +12,7 @@ import thunk from 'redux-thunk';
 import registerServiceWorker from './registerServiceWorker';
 import rootReducer from './rootReducer';
 import {userLoggedIn} from './actions/auth';
-
+import setAuthorizationHeader from './utils/setAuthorizationHeader'
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
@@ -23,8 +23,9 @@ const store = createStore(
 
 if(localStorage.bookworkJWT){
   const user = {
-    token:localStorage.bookworkJWT
+    token:localStorage.bookworkJWT,
   };
+  setAuthorizationHeader(localStorage.bookworkJWT)
   store.dispatch(userLoggedIn(user));
 }
 

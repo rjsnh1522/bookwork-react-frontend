@@ -1,20 +1,36 @@
 import React, { Component } from 'react';
-import {Segment} from 'semantic-ui-react'
+import {Segment,Message,Icon} from 'semantic-ui-react'
 import SearchBookForm from '../forms/SearchBookForm'
-
+import BookForm from '../forms/BookForm'
+import {saveNewBookAction} from '../../actions/books'
+import {connect} from 'react-redux'
 
 class NewBookPage  extends Component{
 
     state = {
-      book:null
+      book:null,
+      success:false
     }
+
+onBookSelect = (book) => {
+  this.setState({book})
+}
+
+addBook = (data) =>  this.props.saveNewBookAction(data).then(() => this.props.history.push('/books/all'))
+
 
     render(){
 
       return(
         <Segment>
             <h1>Add book to you collection</h1>
-            <SearchBookForm />
+            <SearchBookForm onBookSelect={this.onBookSelect}/>
+
+            {this.state.book && (
+              <BookForm submit={this.addBook} book={this.state.book}/>
+            )}
+
+
         </Segment>
       )
     }
@@ -24,4 +40,4 @@ class NewBookPage  extends Component{
 
 
 
-export default NewBookPage;
+export default connect(null,{saveNewBookAction})(NewBookPage);
