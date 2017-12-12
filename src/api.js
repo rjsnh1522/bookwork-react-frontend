@@ -25,7 +25,7 @@ export default {
     saveNewBook: data =>
       axios.post(url+"/books/save_books",{data}).then(res => {return res.data.book;}),
     fetchAll: () =>
-      axios.get(url+"/books").then(res => { return res.data.books })
+      axios.get(url+"/books").then(res => {  return res.data.books })
 
   }
 };

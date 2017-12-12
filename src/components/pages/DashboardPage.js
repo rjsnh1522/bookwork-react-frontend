@@ -4,17 +4,21 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ConfirmEmailMessage from '../messages/ConfirmEmailMessage'
 import {allBooksSelector} from '../../reducers/bookReducer'
+import {fetchBooksAction} from '../../actions/books'
+
 
 import AddBookCTA from '../ctas/AddBookCTA'
 
 class DashboardPage extends Component {
+
+
 
   render(){
     const {isConfirmed,books} = this.props;
     return (
       <div>
               {!isConfirmed && <ConfirmEmailMessage />}
-              {books.length === 0 && <AddBookCTA />}
+              {books.length === 0 ? <AddBookCTA /> : <p> Already Added the book</p>}
 
       </div>
 
@@ -40,4 +44,4 @@ function mapStateToProps(state){
 
 }
 
-export default connect(mapStateToProps)(DashboardPage);
+export default connect(mapStateToProps,{fetchBooksAction})(DashboardPage);

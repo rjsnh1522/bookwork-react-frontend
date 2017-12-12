@@ -16,6 +16,9 @@ class TopNavigation  extends Component{
           <Menu.Item as={Link} to="/dashboard">
             Dashboard
           </Menu.Item>
+          <Menu.Item as={Link} to="/books/new">
+            Add new Book
+          </Menu.Item>
           <Menu.Menu position="right">
               <Dropdown trigger={<Image avatar src={gravatarUrl('rjsnh1522@gmail.com')}/>}>
               <Dropdown.Menu>

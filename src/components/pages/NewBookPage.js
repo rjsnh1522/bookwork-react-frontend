@@ -4,6 +4,7 @@ import SearchBookForm from '../forms/SearchBookForm'
 import BookForm from '../forms/BookForm'
 import {saveNewBookAction} from '../../actions/books'
 import {connect} from 'react-redux'
+import PropTypes from 'prop-types';
 
 class NewBookPage  extends Component{
 
@@ -37,6 +38,13 @@ addBook = (data) =>  this.props.saveNewBookAction(data).then(() => this.props.hi
 
 }
 
+
+NewBookPage.PropTypes ={
+  saveNewBookAction: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired
+}
 
 
 
